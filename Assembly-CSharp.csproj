@@ -56,6 +56,7 @@
      <Compile Include="Assets\Scripts\Enemy.cs" />
      <Compile Include="Assets\Scripts\goToScene.cs" />
      <Compile Include="Assets\Scripts\Home.cs" />
+     <Compile Include="Assets\Scripts\Main.cs" />
      <Compile Include="Assets\Scripts\moveOffset.cs" />
      <Compile Include="Assets\Scripts\onTrigger.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />

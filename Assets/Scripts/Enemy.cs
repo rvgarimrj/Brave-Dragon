@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour {
 
-	private	Player Player;
+//	private	Player Player;
 	private Rigidbody2D		enemyRB;
 	private	int				XMove,YMove,rand;
 	private	float			tempTime,tempTimeShoot;
@@ -12,13 +12,15 @@ public class Enemy : MonoBehaviour {
 	public	Transform		enemyShoot;
 	public	GameObject 		prefabShoot,prefabExplosion;
 	public	int				percentualOfChangeSide,percentualOfShooting,HP;
+	public	GameObject 		gotHit;
+
 
 	// Use this for initialization
 	void Start () {
 
 		enemyRB = GetComponent<Rigidbody2D> ();
 		XMove = -1;
-		Player = FindObjectOfType (typeof(Player)) as Player;
+//		Player = FindObjectOfType (typeof(Player)) as Player;
 	}
 	
 	// Update is called once per frame
@@ -77,7 +79,6 @@ public class Enemy : MonoBehaviour {
 		{
 		case "Player":
 			explode ();
-			Player.FadeOut ();
 			break;
 		} 
 	}
@@ -86,6 +87,7 @@ public class Enemy : MonoBehaviour {
 	void takeDamage (int damage)
 	{
 		HP -= damage;
+		StartCoroutine("blink");
 		if (HP <= 0) {
 			explode ();
 
@@ -98,5 +100,13 @@ public class Enemy : MonoBehaviour {
 		tempPrefab.transform.position = transform.position;
 		tempPrefab.GetComponent<Rigidbody2D> ().velocity = new Vector2 (XMove * speed, 0);
 		Destroy (this.gameObject);
+	}
+
+	IEnumerator	blink()
+	{
+		gotHit.SetActive (true);
+		yield return new WaitForSeconds(0.5f);
+		gotHit.SetActive (false);
+			
 	}
 }

@@ -26,7 +26,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1128474668056312
 GameObject:
   m_ObjectHideFlags: 0
@@ -232,6 +232,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   shootForce: 300
+  Fade: 0
   Top: {fileID: 0}
   Down: {fileID: 0}
   Left: {fileID: 0}
@@ -240,10 +241,9 @@ MonoBehaviour:
   mainCamera: {fileID: 0}
   prefabShoot: {fileID: 1603667996790018, guid: 5d9e21564f0ee4bdbb42f4c275566064,
     type: 2}
-  fadeSpeed: 1
-  fadeTime: 1
-  fadeIn: 1
-  Sprite: {fileID: 212961203125031054}
+  gotHit: {fileID: 1098497222180898}
+  duration: 5
+  sprite: {fileID: 212961203125031054}
 --- !u!212 &212769328034224722
 SpriteRenderer:
   m_ObjectHideFlags: 1
