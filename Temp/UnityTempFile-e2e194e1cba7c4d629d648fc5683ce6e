@@ -99,11 +99,15 @@
 -define:ENABLE_NATIVE_ARRAY_CHECKS
 -define:UNITY_TEAM_LICENSE
 -define:UNITY_HAS_GOOGLEVR
+'Assets/Scripts/_GC.cs'
 'Assets/Scripts/becameInvisible.cs'
+'Assets/Scripts/damageShoot.cs'
 'Assets/Scripts/DestroyExplosion.cs'
 'Assets/Scripts/Enemy.cs'
+'Assets/Scripts/gameOver.cs'
 'Assets/Scripts/goToScene.cs'
 'Assets/Scripts/Home.cs'
+'Assets/Scripts/Main.cs'
 'Assets/Scripts/moveOffset.cs'
 'Assets/Scripts/onTrigger.cs'
 'Assets/Scripts/Player.cs'

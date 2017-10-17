@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: b98720d0a9e1f4dd18d3bba33c532f09
-timeCreated: 1508104503
+timeCreated: 1508171868
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -106,10 +106,10 @@ TextureImporter:
       name: miscelaneus_0
       rect:
         serializedVersion: 2
-        x: 86
-        y: 884
-        width: 790
-        height: 88
+        x: 10
+        y: 174
+        width: 235
+        height: 39
       alignment: 4
       pivot: {x: 0, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

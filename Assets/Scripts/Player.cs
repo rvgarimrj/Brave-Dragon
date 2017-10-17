@@ -1,9 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-
-
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour {
 
@@ -57,32 +56,43 @@ public class Player : MonoBehaviour {
 //		}
 //	}
 
-
+	private _GC 			_GC;
+	private	Enemy 			Enemy;
 	private	Rigidbody2D		playerRB;
 	private	VirtualJoystick joystick;
 	private	Animator		playerAnimator;
+	private	Transform 		Top, Down, Left, Right;
 
+	public	Transform		spawnPlayer;
+	public	float			scale;
+	public	float			percLife;
 	public	float			speed, shootForce;
-	private	Transform Top, Down, Left, Right;
 	public  Transform 		playerShoot;
-//	public 	Camera			mainCamera;
 	public	GameObject 		prefabShoot;
-	public	int				HP;
-	private bool dead;
-
-
-//	public Color spriteColor = Color.white;
-//	public float fadeInTime = 1.5f;
-//	public float fadeOutTime = 3f;
-//	public float delayToFadeOut = 5f;
-//	public float delayToFadeIn = 5f;
-
-//	public Sprite img;
+	public	float			HP,HPMax;
+	public 	bool 			dead;
+	public	int 			damage,extraLifes,damageShoot1,damageShoot2,damageShoot3,damageShoot4;
 
 
 	// Use this for initialization
 	void Start () {
-		
+
+		_GC = FindObjectOfType (typeof(_GC)) as _GC;
+		Enemy = FindObjectOfType (typeof(Enemy)) as Enemy;
+
+		// Set HP Bar to 100% and save original scale
+
+//		theScale = barraHP.localScale;
+//		scale = theScale.x;
+		HP = HPMax;
+//		transform.position = spawnPlayer.transform.position;
+
+//		percLife = (HP / HPMax);
+//		theScale.x = percLife * scale;
+//		barraHP.localScale = theScale;
+
+		// 
+
 		dead = false;
 		playerRB = GetComponent<Rigidbody2D> ();	
 		joystick = FindObjectOfType (typeof(VirtualJoystick)) as VirtualJoystick;
@@ -92,12 +102,12 @@ public class Player : MonoBehaviour {
 		Right = GameObject.Find ("Right").transform;
 		playerAnimator = GetComponent<Animator> ();
 
-		Vector3 minScreenBounds = Camera.main.ScreenToWorldPoint(new Vector3(50, 50, 0));
-		Vector3 maxScreenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width -50, Screen.height -50, 0));
-		print (minScreenBounds);
-		print (maxScreenBounds);
-		Left.transform.position = minScreenBounds;
-		Right.transform.position = maxScreenBounds;
+//		Vector3 minScreenBounds = Camera.main.ScreenToWorldPoint(new Vector3(50, 50, 0));
+//		Vector3 maxScreenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width -50, Screen.height -50, 0));
+//		print (minScreenBounds);
+//		print (maxScreenBounds);
+//		Left.transform.position = minScreenBounds;
+//		Right.transform.position = maxScreenBounds;
 //		Left.transform.position.x += 1;
 //		Right.transform.position.x -= 1;
 //		Left.position = new Vector3(Mathf.Clamp(transform.position.x, minScreenBounds.x + 1, maxScreenBounds.x - 1),Mathf.Clamp(transform.position.y, minScreenBounds.y + 1, maxScreenBounds.y - 1), transform.position.z);
@@ -116,24 +126,29 @@ public class Player : MonoBehaviour {
 
 	// Update is called once per frame
 	void FixedUpdate () {
+
 		if (!dead) {
 			
+
 			if (Input.GetButtonDown ("Fire")) {
 				Fire ();
 			}
 			float x = joystick.Horizontal ();
 			float y = joystick.Vertical ();
-			if (x < 0) {
-				x = -1;
-			} else if (x > 0) {
-				x = 1;
-			}
-		
-			if (y < 0) {
-				y = -1;
-			} else if (x > 0) {
-				y = 1;
-			}
+
+			//  Uncomment to make movements more quickly
+
+//			if (x < 0) {
+//				x = -1;
+//			} else if (x > 0) {
+//				x = 1;
+//			}
+//		
+//			if (y < 0) {
+//				y = -1;
+//			} else if (x > 0) {
+//				y = 1;
+//			}
 
 			playerRB.velocity = new Vector2 (x * speed, y * speed);
 			// Camera limits the Player
@@ -151,25 +166,25 @@ public class Player : MonoBehaviour {
 				transform.position = new Vector3 (transform.position.x, Top.position.y, transform.position.z);
 
 			}
-		}
+		} 
 	}
 
 	void Fire()
 	{
-			// Set shoot animation
-//		playerAnimator.SetBool("shoot",true);
-			// Fire
 
 			GameObject tempPrefab = Instantiate (prefabShoot) as GameObject;
 			tempPrefab.transform.position = playerShoot.position;
 			tempPrefab.GetComponent<Rigidbody2D> ().AddForce (new Vector2 (shootForce, 0));
 
-//		 StartCoroutine ("count");
-
 	}
 
 
-
+	IEnumerator Died()
+	{
+		yield return new WaitForSeconds (3);
+		Destroy (this.gameObject);
+		SceneManager.LoadScene ("gameover");
+	}
 
 	IEnumerator	Dizzy()
 	{
@@ -180,55 +195,68 @@ public class Player : MonoBehaviour {
 	}
 	void OnCollisionEnter2D(Collision2D col)
 	{
-		switch (col.gameObject.tag) {
-		case "Enemy":
-			takeDamage (1);
-			break;
+		if (!dead) {
+			
+			switch (col.gameObject.tag) {
+			case "Enemy":
+				takeDamage (Enemy.damage);
+				break;
+			}
 		}
 	}
 
 	void OnTriggerEnter2D(Collider2D col)
 	{
-		switch (col.gameObject.tag) 
-		{
-
-		case "enemyShoot":
-			takeDamage (1);	
-			break;
-
-		}
-	}
-
-	void takeDamage (int damage)
-	{
 		if (!dead) {
 			
-			HP -= damage;
-			if (HP <= 0) {
-				explode ();
+			switch (col.gameObject.tag) {
 
-			} else {
-				playerAnimator.SetBool ("dizzy", true);
-				StartCoroutine ("Dizzy");
-
+			case "enemyShoot1":
+				takeDamage (Enemy.damageShoot1);	
+				break;
 
 			}
 		}
 	}
 
-	void explode()
+	void takeDamage (int damage)
 	{
-		playerAnimator.SetBool ("dead", true);
-		playerRB.IsSleeping ();
+			HP -= damage;
+			percLife = (HP / HPMax);
+			if (HP <= 0) {
+				DieOrRestart ();
 
-		dead = true;
-
-
-//		GameObject tempPrefab = Instantiate (prefabExplosion) as GameObject;
-//		tempPrefab.transform.position = transform.position;
-//		tempPrefab.GetComponent<Rigidbody2D> ().velocity = new Vector2 (XMove * speed, 0);
-//		Destroy (this.gameObject);
+			} else {
+				_GC.UpdateHPBar (percLife);
+				playerAnimator.SetBool ("dizzy", true);
+				StartCoroutine ("Dizzy");
+			}
 	}
 
+	void DieOrRestart()
+	{
+		percLife = 0;
+		_GC.UpdateHPBar (percLife);
+		extraLifes -= 1;
+		_GC.extraLifes = extraLifes;
+		if (extraLifes <= 0) {
+			dead = true;
+			playerAnimator.SetBool ("dead", true);
+			playerRB.velocity = new Vector2 (0.3f * speed, 0.3f * speed);
+			playerRB.IsSleeping ();
+			StartCoroutine ("Died");
 
+
+
+		} else {
+			dead = false;
+			_GC.StartHPBar ();
+			HP = HPMax;
+			percLife = (HP / HPMax);
+
+			transform.position = spawnPlayer.transform.position;
+
+		}
+
+	}
 }
