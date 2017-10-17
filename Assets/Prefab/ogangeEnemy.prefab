@@ -355,7 +355,7 @@ MonoBehaviour:
   HP: 5
   totalScore: 10
   gotHit: {fileID: 1473156945112202}
-  damage: 2
+  damage: 5
   damageShoot1: 1
   damageShoot2: 2
   damageShoot3: 3

@@ -208,6 +208,8 @@ MonoBehaviour:
   playerShoot: {fileID: 4453263018193182}
   prefabShoot: {fileID: 1603667996790018, guid: 5d9e21564f0ee4bdbb42f4c275566064,
     type: 2}
+  prefabParticles: {fileID: 1598880776146064, guid: 4b5a12069f7f1418e9b33fd0b7f95a87,
+    type: 2}
   HP: 0
   HPMax: 10
   dead: 0

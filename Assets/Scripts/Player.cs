@@ -68,7 +68,7 @@ public class Player : MonoBehaviour {
 	public	float			percLife;
 	public	float			speed, shootForce;
 	public  Transform 		playerShoot;
-	public	GameObject 		prefabShoot;
+	public	GameObject 		prefabShoot,prefabParticles;
 	public	float			HP,HPMax;
 	public 	bool 			dead;
 	public	int 			damage,extraLifes,damageShoot1,damageShoot2,damageShoot3,damageShoot4;
@@ -214,7 +214,11 @@ public class Player : MonoBehaviour {
 			case "enemyShoot1":
 				takeDamage (Enemy.damageShoot1);	
 				break;
+			case "powerup":
+				powerup (col.gameObject);
 
+				break;
+	
 			}
 		}
 	}
@@ -258,5 +262,12 @@ public class Player : MonoBehaviour {
 
 		}
 
+	}
+	void powerup(GameObject GO)
+	{
+		GameObject tempPrefab = Instantiate (prefabParticles) as GameObject;
+		tempPrefab.transform.position = GO.transform.position;
+		Destroy (GO);
+		Destroy (tempPrefab, 3);
 	}
 }
