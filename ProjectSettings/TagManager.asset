@@ -8,6 +8,17 @@ TagManager:
   - enemyShoot1
   - playerShoot1
   - powerup
+  - playerShoot2
+  - playerShoot3
+  - playerShoot4
+  - Friend
+  - FriendItem
+  - PlayerShoot
+  - Friend1
+  - Friend2
+  - enemyShoot
+  - life
+  - coin
   layers:
   - Default
   - TransparentFX

@@ -15,8 +15,8 @@ public class Enemy : MonoBehaviour {
 	public	GameObject 		prefabShoot,prefabExplosion;
 	public	int				percentualOfChangeSide,percentualOfShooting,HP,totalScore;
 	public	GameObject 		gotHit;
-	public	int damage,damageShoot1,damageShoot2,damageShoot3,damageShoot4;
-
+	public	int 			damage;
+	public	GameObject 		loot;
 	// Use this for initialization
 	void Start () {
 		_GC = FindObjectOfType (typeof(_GC)) as _GC;
@@ -72,7 +72,25 @@ public class Enemy : MonoBehaviour {
 			
 			switch (col.tag) {
 			case "playerShoot1":
-			takeDamage (Player.damageShoot1);
+				takeDamage (Player.damageShoot1);
+				break;
+			case "playerShoot2":
+				takeDamage (Player.damageShoot2);
+				break;
+			case "playerShoot3":
+				takeDamage (Player.damageShoot3);
+				break;
+			case "playerShoot4":
+				takeDamage (Player.damageShoot4);
+				break;
+			case "Friend1":
+				explode ();
+				break;
+			case "Friend2":
+				explode ();
+				break;
+			case "Player":
+				explode ();
 				break;
 			}
 	}
@@ -84,6 +102,7 @@ public class Enemy : MonoBehaviour {
 			case "Player":
 				explode ();
 				break;
+
 			} 
 	}
 
@@ -100,10 +119,15 @@ public class Enemy : MonoBehaviour {
 
 	void explode()
 	{
+		Player.damageEnemy (damage);
 		GameObject tempPrefab = Instantiate (prefabExplosion) as GameObject;
 		tempPrefab.transform.position = transform.position;
 		tempPrefab.GetComponent<Rigidbody2D> ().velocity = new Vector2 (XMove * speed, 0);
 		_GC.points += totalScore;
+
+		GameObject tempLoot = Instantiate (loot) as GameObject;
+		tempLoot.SendMessage ("setSpeed", speed, SendMessageOptions.DontRequireReceiver);
+		tempLoot.transform.position = transform.position;
 		Destroy (this.gameObject);
 
 	}

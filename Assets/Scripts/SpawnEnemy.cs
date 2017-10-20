@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SpawnEnemy : MonoBehaviour {
-	public	GameObject	prefabEnemy;
+	public	GameObject[]	prefabEnemy;
 	public	float 		spawnTimer;
 	public	Transform	TopLimit, BottomLimit;
-
+	private int	maxLenght;
 	private	float tempTime,minY, maxY;
 
 	// Use this for initialization
@@ -23,13 +23,16 @@ public class SpawnEnemy : MonoBehaviour {
 		if (tempTime >= spawnTimer) 
 		{
 			tempTime = 0;
-			Spawn ();
+//			Spawn ();
 		}
 	}
 
 	void Spawn()
 	{
-		GameObject tempPrefab = Instantiate (prefabEnemy) as GameObject;
+		maxLenght = prefabEnemy.Length;
+		int rand = Random.Range (0, maxLenght);
+
+		GameObject tempPrefab = Instantiate (prefabEnemy[rand]) as GameObject;
 		float	posY = Random.Range (minY, maxY);
 		tempPrefab.transform.position = new Vector3 (transform.position.x, posY, transform.position.z);
 			
