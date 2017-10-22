@@ -261,6 +261,9 @@ public class Player : MonoBehaviour {
 			case "coin":
 				coin (col.gameObject);
 				break;
+			case "life":
+				life (col.gameObject);
+				break;
 			}
 		}
 	}
@@ -344,6 +347,19 @@ public class Player : MonoBehaviour {
 
 	void coin(GameObject GO)
 	{
+		GameObject tempPrefab = Instantiate (prefabParticles) as GameObject;
+		tempPrefab.transform.position = GO.transform.position;
+		Destroy (GO);
+		Destroy (tempPrefab, 3);
+	}
 
+	void life(GameObject GO)
+	{
+		extraLifes++;
+		_GC.extraLifes = extraLifes;
+		GameObject tempPrefab = Instantiate (prefabParticles) as GameObject;
+		tempPrefab.transform.position = GO.transform.position;
+		Destroy (GO);
+		Destroy (tempPrefab, 3);
 	}
 }
