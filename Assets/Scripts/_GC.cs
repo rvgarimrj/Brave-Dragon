@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class _GC : MonoBehaviour {
-	public	Text			pointText,extraLifeTxt;
+	public	Text			pointText,extraLifeTxt,Coins_Txt;
 	public	int 			points;
 	public  Transform 		barraHP;
 	private	Vector3 		theScale;
@@ -14,7 +14,7 @@ public class _GC : MonoBehaviour {
 	private	GameObject 		actualPlayer;	
 	private	Player 			Player;
 	private	float			percLife;
-	public int 			extraLifes;
+	public int 			extraLifes,coins;
 
 	// Use this for initialization
 	void Start () {
@@ -33,16 +33,18 @@ public class _GC : MonoBehaviour {
 //			actualPlayer = Instantiate (playerGO [0]) as GameObject;	
 
 		}
-
+		coins = PlayerPrefs.GetInt ("coins", coins);
 		extraLifes = Player.extraLifes;
 		extraLifeTxt.text = extraLifes.ToString ();
-
+		Coins_Txt.text = coins.ToString ();
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
 		pointText.text = points.ToString ();
 		extraLifeTxt.text = extraLifes.ToString ();
+		Coins_Txt.text = coins.ToString ();
+
 	}
 
 	public void StartHPBar()

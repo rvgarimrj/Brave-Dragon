@@ -18,6 +18,7 @@ public class Player : MonoBehaviour {
 	private	string[] 		shoot;
 	private GameObject 		Friend1, Friend2;
 	private int damageShootEnemy, damageEnemyValue,powerUps;
+	private int coins, total_coins,temp_coins;
 	public int 			index;
 	public	Transform		spawnPlayer,spawnFriend1,spawnFriend2;
 	public	float			scale;
@@ -34,7 +35,7 @@ public class Player : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
+		total_coins = PlayerPrefs.GetInt ("coins", total_coins);
 		LevelBoundarySetup = FindObjectOfType (typeof(LevelBoundarySetup)) as LevelBoundarySetup;
 //		Top = LevelBoundarySetup.Top;
 //		Bottom = LevelBoundarySetup.Bottom;
@@ -347,10 +348,23 @@ public class Player : MonoBehaviour {
 
 	void coin(GameObject GO)
 	{
+		if (total_coins == 0) {
+			coins++;
+
+			total_coins +=coins;
+		} else {
+			coins++;
+
+			total_coins = total_coins + coins;
+		}
+
+		temp_coins = temp_coins++;		
+		total_coins = total_coins + total_coins * coins;
 		GameObject tempPrefab = Instantiate (prefabParticles) as GameObject;
 		tempPrefab.transform.position = GO.transform.position;
 		Destroy (GO);
 		Destroy (tempPrefab, 3);
+		_GC.coins = total_coins;
 	}
 
 	void life(GameObject GO)
