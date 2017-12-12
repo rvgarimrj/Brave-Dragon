@@ -166,6 +166,7 @@ d99fb1fc928a92726a6ef1c07368ba85 Assembly-CSharp.dll:.DestroyExplosion
 83a32bf700c2420704e7a6425d8d7eda Assembly-CSharp.dll:.music
 46dadf34860ea7a3438a01aeb96563b1 Assembly-CSharp.dll:.spawnCoins
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.invencible
+05524b8f659e7bfe5756d1335fec24ba UnityEngine.Purchasing.dll:UnityEngine.Purchasing.AsyncUtil
 3b3976922af158b4e1b2616fe4676a3e Assembly-CSharp.dll:.googlePlayService
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:GooglePlayGames.OurUtils.PlayGamesHelperObject
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:._GC_Powerup
@@ -175,3 +176,15 @@ b161097e572da6a91f0b21de68f948ef Assembly-CSharp.dll:._GC_Home
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Advertisements.dll:UnityEngine.Advertisements.Editor.Placeholder
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.becameInvisible
 c13740bdb65e9bef5ede85e00330ae89 Assembly-CSharp.dll:.goToScene
+05524b8f659e7bfe5756d1335fec24ba UnityStore.dll:UnityEngine.Store.MainThreadDispatcher
+50667894c33b478dc38ae949114bb1e8 Assembly-CSharp-firstpass.dll:AppStoresSupport.AppStoreSettings
+05524b8f659e7bfe5756d1335fec24ba Stores.dll:UnityEngine.Purchasing.MoolahStoreImpl
+05524b8f659e7bfe5756d1335fec24ba Stores.dll:UnityEngine.Purchasing.AsyncWebUtil
+05524b8f659e7bfe5756d1335fec24ba Stores.dll:UnityEngine.Purchasing.Extension.UnityUtil
+4dfe33d9090a45557c2c14e3b464ad87 Editor.dll:UnityEditor.Purchasing.ObfuscatorWindow
+4dfe33d9090a45557c2c14e3b464ad87 Editor.dll:UnityEditor.Purchasing.ProductCatalogEditor
+a2205716825ec469d1261a4e1cadddf2 Assembly-CSharp-firstpass.dll:UnityEngine.Purchasing.IAPButton
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp-firstpass.dll:.IAPDemo
+43e0bb756dbd788930987fd144a47b68 Assembly-CSharp-firstpass.dll:UnityEngine.Purchasing.IAPListener
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp-firstpass.dll:UnityEngine.Purchasing.DemoInventory
+39e7fae39de9e926d1c147b702117614 Assembly-CSharp.dll:.IAPManager

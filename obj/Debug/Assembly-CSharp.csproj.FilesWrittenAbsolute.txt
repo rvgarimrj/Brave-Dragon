@@ -43,3 +43,16 @@
 /Users/Shared/Unity/Brave Dragon/Temp/bin/Debug/Mono.Cecil.Pdb.dll
 /Users/Shared/Unity/Brave Dragon/Temp/bin/Debug/Mono.Cecil.Mdb.dll
 /Users/Shared/Unity/Brave Dragon/Temp/bin/Debug/UnityEngine.Advertisements.dll
+/Users/Shared/Unity/Brave Dragon/Temp/bin/Debug/UnityEngine.Purchasing.dll
+/Users/Shared/Unity/Brave Dragon/Temp/bin/Debug/ChannelPurchase.dll
+/Users/Shared/Unity/Brave Dragon/Temp/bin/Debug/UnityStore.dll
+/Users/Shared/Unity/Brave Dragon/Temp/bin/Debug/FacebookStore.dll
+/Users/Shared/Unity/Brave Dragon/Temp/bin/Debug/Security.dll
+/Users/Shared/Unity/Brave Dragon/Temp/bin/Debug/Purchasing.Common.dll
+/Users/Shared/Unity/Brave Dragon/Temp/bin/Debug/Apple.dll
+/Users/Shared/Unity/Brave Dragon/Temp/bin/Debug/Stores.dll
+/Users/Shared/Unity/Brave Dragon/Temp/bin/Debug/Tizen.dll
+/Users/Shared/Unity/Brave Dragon/Temp/bin/Debug/winrt.dll
+/Users/Shared/Unity/Brave Dragon/Temp/bin/Debug/Editor.dll
+/Users/Shared/Unity/Brave Dragon/Temp/bin/Debug/Assembly-CSharp-firstpass.dll
+/Users/Shared/Unity/Brave Dragon/Temp/bin/Debug/Assembly-CSharp-firstpass.dll.mdb

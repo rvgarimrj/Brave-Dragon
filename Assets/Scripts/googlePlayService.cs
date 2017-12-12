@@ -13,9 +13,9 @@ public class googlePlayService : MonoBehaviour {
 		PlayGamesPlatform.InitializeInstance (config);
 		PlayGamesPlatform.DebugLogEnabled = true;
 		PlayGamesPlatform.Activate ();
-		if (Social.localUser.authenticated == false) {
+//		if (Social.localUser.authenticated == false) {
 			loginGoogle ();
-		}
+//		}
 	}
 	
 	// Update is called once per frame
@@ -29,25 +29,27 @@ public class googlePlayService : MonoBehaviour {
 		Social.localUser.Authenticate ((bool sucesso) => {
 			if(sucesso)
 			{
-				Debug.Log("DEBUG Google Play Services: Logado");
-				authenticated();
+				Debug.Log("DEBUG: Google Play Services: Logado");
+				authenticated(true);
 
 			}
 			else{
-				Debug.Log("DEBUG Google Play Services: Erro");
+				authenticated(false);
+
+				Debug.Log("DEBUG: Google Play Services: Erro");
 			}
 		});
 	}
-	void authenticated()
+	void authenticated(bool auth)
 	{
-		if (Social.localUser.authenticated == true) {
-			Debug.Log("DEBUG Google Play Services: Autenticado");
+		if (auth) {
+			Debug.Log("DEBUG: Google Play Services: Autenticado");
 			btnRanking.SetActive (true);
 			btnConqueer.SetActive (true);
 			btnCoins.SetActive (true);
 			btnLogin.SetActive (false);
 		} else {
-			Debug.Log("DEBUG Google Play Services: Não autenticado");
+			Debug.Log("DEBUG: Google Play Services: Não autenticado");
 			btnRanking.SetActive (false);
 			btnConqueer.SetActive (false);
 			btnCoins.SetActive (false);
@@ -58,18 +60,20 @@ public class googlePlayService : MonoBehaviour {
 
 	public void showRanking()
 	{
-		PlayGamesPlatform.Instance.ShowLeaderboardUI ("CgkIvcG1jLcCEAIQAQ");
-		Debug.Log("DEBUG Google Play Services: Chamando Ranking");
+		PlayGamesPlatform.Instance.ShowLeaderboardUI (BraveDragonPlayService.leaderboard_score_ranking);
+		Debug.Log("DEBUG: Google Play Services: Chamando Ranking");
 
 	}
 
 	public void showCoins()
 	{
 		PlayGamesPlatform.Instance.ShowLeaderboardUI (BraveDragonPlayService.leaderboard_coins_ranking);
+		Debug.Log("DEBUG: Google Play Services: Chamando Ranking Coins");
 	}
 
 	public void showConquistas()
 	{
 		Social.ShowAchievementsUI ();
+		Debug.Log("DEBUG: Google Play Services: Chamando Achieviments");
 	}
 }

@@ -243,10 +243,12 @@ public class _GC : MonoBehaviour {
 //			print ("morreu ");
 			if (Social.localUser.authenticated == true) {
 				Social.ReportScore (GlobalVariables.points, BraveDragonPlayService.leaderboard_score_ranking, (bool sucess) => {
+					Debug.Log ("DEBUG: Report Score" + GlobalVariables.points.ToString () + " - " + coins.ToString ());
 				});
 				Social.ReportScore (coins, BraveDragonPlayService.leaderboard_coins_ranking, (bool sucess) => {
+					Debug.Log ("DEBUG: Report Score" + GlobalVariables.points.ToString () + " - " + coins.ToString ());
 				});
-				Debug.Log ("DEBUG: Report Score" + GlobalVariables.points.ToString () + " - " + coins.ToString ());
+
 			}
 
 			yield return new WaitForSeconds (3);

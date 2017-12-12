@@ -157,7 +157,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         /**  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f060001;
-        public static final int UnityThemeSelector=0x7f060002;
+        public static final int UnityThemeSelector=0x7f060003;
+        public static final int VrActivityTheme=0x7f060002;
     }
     public static final class styleable {
         /** Attributes that can be used with a LoadingImageView.
