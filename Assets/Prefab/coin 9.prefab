@@ -52,13 +52,13 @@ GameObject:
   m_Component:
   - component: {fileID: 4054693103887198}
   - component: {fileID: 212459526718617756}
-  - component: {fileID: 58878471460706086}
   - component: {fileID: 114873906489341670}
   - component: {fileID: 50506289826125732}
   - component: {fileID: 95358520941136632}
+  - component: {fileID: 61122168435240856}
   m_Layer: 0
   m_Name: coin 9
-  m_TagString: coin
+  m_TagString: coin 9
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -70,7 +70,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1525363398133660}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.09, y: 0.34, z: 0}
+  m_LocalPosition: {x: 3.272191, y: -2.5828145, z: 0}
   m_LocalScale: {x: 0.6449738, y: 0.6449738, z: 0.6449738}
   m_Children:
   - {fileID: 4433900252268746}
@@ -124,8 +124,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!58 &58878471460706086
-CircleCollider2D:
+--- !u!61 &61122168435240856
+BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -136,9 +136,19 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.7822956, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.8, y: 1}
+    newSize: {x: 0.8, y: 0.8}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Radius: 0.39999998
+  m_Size: {x: 2.3645914, y: 1}
+  m_EdgeRadius: 0
 --- !u!95 &95358520941136632
 Animator:
   serializedVersion: 3
@@ -167,7 +177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b68d69c8e5dd4abf93bafb3cf11dacd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
+  speed: 1
 --- !u!212 &212459526718617756
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -197,8 +207,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -361578905
-  m_SortingLayer: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: f4bcf322342034533b28905070916465, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -242,7 +252,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 531320874979f445cb014f1813a87b49, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 66a34c5ca672545e08aa3323145332ef, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

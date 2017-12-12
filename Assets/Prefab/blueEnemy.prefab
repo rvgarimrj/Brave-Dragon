@@ -70,7 +70,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1950745419839682}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.39, y: 0.06, z: 0}
+  m_LocalPosition: {x: 4.47, y: 0.32, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 4965093110141118}
@@ -133,7 +133,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -212,21 +212,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74be957fdb4a34e0792f8b42e5a3a5e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: 1.5
   shootForce: -170
   timeForChangeSide: 1
-  timeForShooting: 2
+  timeForShooting: 2.5
   enemyShoot: {fileID: 4965093110141118}
-  prefabShoot: {fileID: 1919767995863668, guid: 5d88058a8699d499a8b2cbc966ed4e17,
+  prefabShoot: {fileID: 1076356829698678, guid: de9b5efe61a7241749ebd6d52d533762,
     type: 2}
   prefabExplosion: {fileID: 1549276355264464, guid: 12d078908dbca4997bbeb64954240858,
     type: 2}
-  percentualOfChangeSide: 0
+  percentualOfChangeSide: 50
   percentualOfShooting: 100
   HP: 5
-  totalScore: 10
+  totalScore: 100
+  lootPercentage: 30
   gotHit: {fileID: 1474635629663906}
   damage: 5
+  loot:
+  - {fileID: 1372846719515022, guid: c6e48bc9539fc4e7c9ef6712c68c3440, type: 2}
 --- !u!114 &114401548637563654
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -267,8 +270,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -361578905
-  m_SortingLayer: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1c0bbf31364704ac5af7a59b0ba9b206, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

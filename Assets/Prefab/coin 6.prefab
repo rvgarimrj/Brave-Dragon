@@ -36,13 +36,13 @@ GameObject:
   m_Component:
   - component: {fileID: 4314158712813760}
   - component: {fileID: 212320312669462046}
-  - component: {fileID: 58328047045240954}
   - component: {fileID: 114736064745027074}
   - component: {fileID: 50108180683190686}
   - component: {fileID: 95699087219758218}
+  - component: {fileID: 61540427313301906}
   m_Layer: 0
   m_Name: coin 6
-  m_TagString: coin
+  m_TagString: coin 6
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -83,7 +83,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1275141370565150}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.09, y: 0.34, z: 0}
+  m_LocalPosition: {x: -3.235669, y: -2.4831316, z: 0}
   m_LocalScale: {x: 0.6449738, y: 0.6449738, z: 0.6449738}
   m_Children:
   - {fileID: 4048970044534578}
@@ -124,8 +124,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!58 &58328047045240954
-CircleCollider2D:
+--- !u!61 &61540427313301906
+BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -136,9 +136,19 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.77127856, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.8, y: 1}
+    newSize: {x: 0.8, y: 0.8}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Radius: 0.39999998
+  m_Size: {x: 2.3425574, y: 1}
+  m_EdgeRadius: 0
 --- !u!95 &95699087219758218
 Animator:
   serializedVersion: 3
@@ -167,7 +177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b68d69c8e5dd4abf93bafb3cf11dacd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
+  speed: 1
 --- !u!212 &212129333174897908
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -200,7 +210,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 80eb0a61e9bc742039f862a12e614ac1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 314d87531fe5d465b9d15459bd8f05c5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -239,8 +249,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -361578905
-  m_SortingLayer: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: f4bcf322342034533b28905070916465, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

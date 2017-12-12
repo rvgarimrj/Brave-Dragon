@@ -6,10 +6,16 @@ public class DestroyExplosion : MonoBehaviour {
 
 	public	float		timeLife;
 	private	float tempTime;
+	private string	sound;
+	private AudioSource audioSource;
 
 	// Use this for initialization
 	void Start () {
-		
+		sound = PlayerPrefs.GetString ("music");
+		if (sound == "on") {
+			audioSource = GetComponent<AudioSource> ();
+			audioSource.Play ();
+		}
 	}
 	
 	// Update is called once per frame

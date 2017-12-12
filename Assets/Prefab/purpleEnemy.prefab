@@ -133,7 +133,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -223,12 +223,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74be957fdb4a34e0792f8b42e5a3a5e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: 1.5
   shootForce: -170
   timeForChangeSide: 1
-  timeForShooting: 2
+  timeForShooting: 2.5
   enemyShoot: {fileID: 4681805491069848}
-  prefabShoot: {fileID: 1919767995863668, guid: 5d88058a8699d499a8b2cbc966ed4e17,
+  prefabShoot: {fileID: 1020601616986222, guid: 0827dcc031f4c4ca8b53c1ae7add247e,
     type: 2}
   prefabExplosion: {fileID: 1549276355264464, guid: 12d078908dbca4997bbeb64954240858,
     type: 2}
@@ -236,8 +236,14 @@ MonoBehaviour:
   percentualOfShooting: 100
   HP: 5
   totalScore: 10
+  lootPercentage: 20
   gotHit: {fileID: 1701715581111836}
   damage: 5
+  loot:
+  - {fileID: 1445255389624196, guid: c0903dbf8f5bf41d6817a99e72bf1c56, type: 2}
+  - {fileID: 1272246943384632, guid: fa58b71a5fb1840aeb10c182d5f280e8, type: 2}
+  - {fileID: 1033278904168890, guid: 5b344abeefa38486fbaa5dd1782c4131, type: 2}
+  - {fileID: 1592257124368022, guid: e155a7d975c6c4ce690d56ce8013ef4b, type: 2}
 --- !u!212 &212297734567032808
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -309,8 +315,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -361578905
-  m_SortingLayer: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: fd7304aa6d2d14e7fba7f8a6eba5d54e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

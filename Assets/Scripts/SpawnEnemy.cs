@@ -11,27 +11,28 @@ public class SpawnEnemy : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
 		minY = BottomLimit.position.y;
 		maxY = TopLimit.position.y;
 
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		tempTime += Time.fixedDeltaTime;
 		if (tempTime >= spawnTimer) 
 		{
 			tempTime = 0;
-//			Spawn ();
+			if (!GlobalVariables.paused && !GlobalVariables.dead)  {
+				Spawn ();
+			}
 		}
 	}
 
 	void Spawn()
 	{
+		
 		maxLenght = prefabEnemy.Length;
 		int rand = Random.Range (0, maxLenght);
-
 		GameObject tempPrefab = Instantiate (prefabEnemy[rand]) as GameObject;
 		float	posY = Random.Range (minY, maxY);
 		tempPrefab.transform.position = new Vector3 (transform.position.x, posY, transform.position.z);

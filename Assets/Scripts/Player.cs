@@ -3,90 +3,70 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Advertisements;
 
 public class Player : MonoBehaviour {
 
 
-
+	private	Collider2D playerCollider;
 	private	LevelBoundarySetup 	LevelBoundarySetup;
-	private _GC 			_GC;
+	private _GC 				_GC;
 //	private	Enemy 			Enemy;
 	private	Rigidbody2D		playerRB;
 	private	VirtualJoystick joystick;
-	private	Animator		playerAnimator;
+	private	Animator			playerAnimator;
 	private	Transform 		Top, Down, Left, Right;
 	private	string[] 		shoot;
 	private GameObject 		Friend1, Friend2;
-	private int damageShootEnemy, damageEnemyValue,powerUps;
-	private int coins, total_coins,temp_coins;
-	public int 			index;
-	public	Transform		spawnPlayer,spawnFriend1,spawnFriend2;
-	public	float			scale;
-	public	float			percLife;
-	public	float			speed, shootForce;
+	private int 				damageShootEnemy,powerUps,countdown,indexFriend;
+	private string				sound;
+//	private AudioSource soundTrack;
+	private float 				volume;
+	private Text				invencibleTxt;
+	public int 					coins,total_coins,diamonds,coin_value;
+	public int 					index;
+	public	GameObject		spawnPlayer,spawnFriend1,spawnFriend2;
+	public	float				scale;
+	public	float				percLife;
+	public	float				speed, shootForce,speed_ant;
 	public  Transform 		playerShoot;
 	public	GameObject[] 	prefabShoot;
-	public	GameObject		prefabParticles,Friend1Prefab,Friend2Prefab;
-	public	float			HP,HPMax;
-	public 	bool 			dead, firstAlive,secondAlive;
-	public	int 			damage,extraLifes,damageShoot1,damageShoot2,damageShoot3,damageShoot4,Friends;
+	public	GameObject		prefabParticles;
+	public	float				HP,HPMax;
+	public 	bool 				firstAlive,secondAlive,killall;
+	public	int 				damage,damageShoot1,damageShoot2,damageShoot3,damageShoot4,Friends;
 	public	string 			Shoot;
-
+	public  AudioClip 		audioCoins,audioItens;
+	private string[]			shootNames = new string[]{"playerShoot1","playerShoot2","playerShoot3","playerShoot4"};
+	private int[] 				powerValues = new int[]{10,15,18,20};
+	private float[]			speedValues = new float[]{2.5f,2.8f,3.2f,3.5f};
+	private int[]				invincibleValues = new int[]{5,8,10,12};		
+	[SerializeField] private GameObject[] Friend1Prefab,Friend2Prefab;
+	[SerializeField] private float percSpeed;
 
 	// Use this for initialization
 	void Start () {
-		total_coins = PlayerPrefs.GetInt ("coins", total_coins);
-		LevelBoundarySetup = FindObjectOfType (typeof(LevelBoundarySetup)) as LevelBoundarySetup;
-//		Top = LevelBoundarySetup.Top;
-//		Bottom = LevelBoundarySetup.Bottom;
-//		Left = LevelBoundarySetup.Left;
-//		Right = LevelBoundarySetup.Right;
 
-		Shoot = PlayerPrefs.GetString ("shoot");
-		if (string.IsNullOrEmpty(Shoot))
-		{
-			PlayerPrefs.SetString ("shoot", "playerShoot1");
-		}
+//		extraLifes = GlobalVariables.extralifes;
+		GlobalVariables.enemySpeed = ((speed * percSpeed) / 100);
+		InitiateVariables ();
 		_GC = FindObjectOfType (typeof(_GC)) as _GC;
-//		Enemy = FindObjectOfType (typeof(Enemy)) as Enemy;
-//		PlayerFriend = FindObjectOfType (typeof(PlayerFriend)) as PlayerFriend;
 		HP = HPMax;
-		dead = false;
+		GlobalVariables.dead = false;
+		GlobalVariables.isInvencible = false;
+		GlobalVariables.paused = false;
 		playerRB = GetComponent<Rigidbody2D> ();	
+		playerCollider = GetComponent<Collider2D> ();
 		joystick = FindObjectOfType (typeof(VirtualJoystick)) as VirtualJoystick;
-//		Top = GameObject.Find ("Top").transform;
-//		Down = GameObject.Find ("Down").transform;
-//		Left = GameObject.Find ("Left").transform;
-//		Right = GameObject.Find ("Right").transform;
 		playerAnimator = GetComponent<Animator> ();
-
-//		Vector3 minScreenBounds = Camera.main.ScreenToWorldPoint(new Vector3(50, 50, 0));
-//		Vector3 maxScreenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width -50, Screen.height -50, 0));
-//		print (minScreenBounds);
-//		print (maxScreenBounds);
-//		Left.transform.position = minScreenBounds;
-//		Right.transform.position = maxScreenBounds;
-//		Left.transform.position.x += 1;
-//		Right.transform.position.x -= 1;
-//		Left.position = new Vector3(Mathf.Clamp(transform.position.x, minScreenBounds.x + 1, maxScreenBounds.x - 1),Mathf.Clamp(transform.position.y, minScreenBounds.y + 1, maxScreenBounds.y - 1), transform.position.z);
-
-//		int meioTela = Screen.width / 2;
-//		Vector3 worldPos = mainCamera.ScreenToWorldPoint(new Vector3(meioTela, 0, 0));
-//
-//		print (worldPos.x);
-//		print (worldPos.y);
-//		print (worldPos.z);
-//
-//		Left.position = new Vector3(worldPos.y * -1 - 1.5f, 0, 0);
-//		Right.position = new Vector3(worldPos.y - 1.5f, 0,0);
 
 	}
 
 	// Update is called once per frame
 	void FixedUpdate () {
-
-		if (!dead) {
-			
+		
+		if (!GlobalVariables.dead & !GlobalVariables.paused && !Advertisement.isShowing) {
+			sound = PlayerPrefs.GetString ("music");
 
 			if (Input.GetButtonDown ("Fire")) {
 				Fire ();
@@ -126,11 +106,167 @@ public class Player : MonoBehaviour {
 			}
 		} 
 	}
-
-	void Fire()
+	string WhichShoot(int index)
 	{
+		return shootNames [index - 1];
+	}
+
+	int WhichPower(int index)
+	{
+		return powerValues [index - 1];
+	}
+
+	float WhichSpeed(int index)
+	{
+		return speedValues [index - 1];
+	}
+	int WhichTime(int index)
+	{
+		return invincibleValues [index -1];
+	}
+	public void SpeedUp(float speed_value)
+	{
+		speed = speed + speed_value;
+	}
+
+	
+	void InitialShoot()
+	{
+		if (PlayerPrefs.GetString ("playercolor") == "red") {
+			countdown = WhichTime(PlayerPrefs.GetInt ("redinvincible")) ;
+			Shoot = WhichShoot(PlayerPrefs.GetInt ("redshoot"));
+			speed = WhichSpeed(PlayerPrefs.GetInt("redspeed"));
+			HPMax = WhichPower (PlayerPrefs.GetInt ("redpower"));
+
+		}
+
+		// Green Player Variable settings
+
+		if (PlayerPrefs.GetString ("playercolor") == "green") {
+			countdown = WhichTime(PlayerPrefs.GetInt ("greeninvincible"));
+			Shoot = WhichShoot(PlayerPrefs.GetInt ("greenshoot"));
+			speed = WhichSpeed(PlayerPrefs.GetInt("greenspeed"));
+			HPMax = WhichPower (PlayerPrefs.GetInt ("greenpower"));
+
+		}
+
+		// Blue Player Variable settings
+
+		if (PlayerPrefs.GetString ("playercolor") == "blue") {
+			countdown = WhichTime(PlayerPrefs.GetInt ("blueinvincible"));
+			Shoot = WhichShoot(PlayerPrefs.GetInt ("blueshoot"));
+			speed = WhichSpeed(PlayerPrefs.GetInt("bluespeed"));
+			HPMax = WhichPower (PlayerPrefs.GetInt ("bluepower"));
+
+
+		}
+
+		// Yellow Player Variable settings
+
+
+		if (PlayerPrefs.GetString ("playercolor") == "yellow") {
+			countdown = WhichTime(PlayerPrefs.GetInt ("yellowinvincible"));
+			Shoot = WhichShoot(PlayerPrefs.GetInt ("yellowshoot"));
+			speed = WhichSpeed(PlayerPrefs.GetInt("yellowspeed"));
+			HPMax = WhichPower (PlayerPrefs.GetInt ("yellowpower"));
+		
+		}
+
+		if (GlobalVariables.powerup == 1) {
+			switch (Shoot) {
+			case "playerShoot1":
+				Shoot = "playerShoot2";
+				break;
+			case "playerShoot2":
+				Shoot = "playerShoot3";
+				break;
+			case "playerShoot3":
+				Shoot = "playerShoot4";
+				break;
+			case "playerShoot4":
+				Shoot = "playerShoot4";
+				damageShoot4++;
+				break;
+			}
+		}
+		if (GlobalVariables.powerup == 2) {
+			switch (Shoot) {
+			case "playerShoot1":
+				Shoot = "playerShoot3";
+				break;
+			case "playerShoot2":
+				Shoot = "playerShoot4";
+				break;
+			case "playerShoot3":
+				Shoot = "playerShoot4";
+				damageShoot4++;
+				break;
+			case "playerShoot4":
+				Shoot = "playerShoot4";
+				damageShoot4++;
+				break;
+			}
+		}
+		if (GlobalVariables.powerup > 2) {
+			switch (Shoot) {
+			case "playerShoot1":
+				Shoot = "playerShoot4";
+				damageShoot4++;
+				break;
+			case "playerShoot2":
+				Shoot = "playerShoot4";
+				damageShoot4++;
+				break;
+			case "playerShoot3":
+				Shoot = "playerShoot4";
+				damageShoot4++;
+				break;
+			case "playerShoot4":
+				Shoot = "playerShoot4";
+				damageShoot4++;
+				break;
+			}
+		}
+
+	}
+
+	void InitiateVariables()
+	{
+		volume = 5;
+		Friends = 0;
+		sound = PlayerPrefs.GetString ("music");
+		spawnPlayer = GameObject.Find ("SpawnPlayer");
+//		invencibleTxt = GameObject.Find ("invencibleTime").GetComponent<Text>();
+//		soundTrack = GetComponent<AudioSource> ();
+//		if (sound == "on") {
+//			soundTrack.Play ();
+//		}
+		GlobalVariables.coins = 1;
+		total_coins = PlayerPrefs.GetInt ("coins");
+		LevelBoundarySetup = FindObjectOfType (typeof(LevelBoundarySetup)) as LevelBoundarySetup;
+
+		// Red Player Variables settings
+		InitialShoot();
+
+	}
+	public void PlaySound(){
+//		soundTrack.Play ();
+	}
+
+	public void PauseSound(){
+//		soundTrack.Pause ();
+
+	}
+
+	public void StopSound()
+	{
+//		soundTrack.Stop ();
+	}
+	public void Fire()
+	{	
+		if (!GlobalVariables.dead & !GlobalVariables.paused) {
 			index = chooseShoot (Shoot);
-			GameObject tempPrefab = Instantiate (prefabShoot[index]) as GameObject;
+			GameObject tempPrefab = Instantiate (prefabShoot [index]) as GameObject;
 			tempPrefab.transform.position = playerShoot.position;
 			tempPrefab.GetComponent<Rigidbody2D> ().AddForce (new Vector2 (shootForce, 0));
 			if (firstAlive) {
@@ -139,15 +275,9 @@ public class Player : MonoBehaviour {
 			if (secondAlive) {
 				Friend2.SendMessage ("Fire", SendMessageOptions.DontRequireReceiver);
 			}
-
-
+		}
 	}
-	public void damageEnemy(int damage)
-	{
-	
-		damageEnemyValue = damage;
 
-	}
 	public void shootEnemy(int shootDamage)
 	{
 		damageShootEnemy = shootDamage;
@@ -160,16 +290,41 @@ public class Player : MonoBehaviour {
 		switch (name) {
 		case "Friend1":
 			firstAlive = false;
+			Destroy (Friend1);
 			break;
 		case "Friend2":
 			secondAlive = false;
+			Destroy (Friend2);
+
 			break;
 		}
 	}
 
 	void AddFriends(GameObject GO)
 	{
-		Friends += 1;
+		switch (GO.name) {
+		case "redItem":
+			indexFriend = 0;
+			break;
+		case "greenItem":
+			indexFriend = 1;
+			break;
+		case "blueItem":
+			indexFriend = 2;
+			break;
+		case "yellowItem":
+			indexFriend = 3;
+			break;
+		}
+
+      	Friends += 1;
+		HP += 5;
+		if (HP > HPMax) {
+			HP = HPMax;
+			percLife = 1;
+			_GC.UpdateHPBar (percLife);
+		}
+		GlobalVariables.points += 200;
 		GameObject tempPrefab = Instantiate (prefabParticles) as GameObject;
 		tempPrefab.transform.position = GO.transform.position;
 		Destroy (GO);
@@ -177,21 +332,32 @@ public class Player : MonoBehaviour {
 
 		if (Friends == 2 && secondAlive) {
 			firstAlive = true;
-			Friend1 = Instantiate (Friend1Prefab);
+			Friend1 = Instantiate (Friend1Prefab[indexFriend]);
 			Friend1.transform.SetParent (transform);
-			Friend1.transform.position = spawnFriend1.position;
+			Friend1.transform.position = spawnFriend1.transform.position;
 		}
 		if (!firstAlive && Friends == 1){
 			firstAlive = true;
-			Friend1 = Instantiate (Friend1Prefab);
+			Friend1 = Instantiate (Friend1Prefab[indexFriend]);
 			Friend1.transform.SetParent (transform);
-			Friend1.transform.position = spawnFriend1.position;
+			Friend1.transform.position = spawnFriend1.transform.position;
+
 		}
 		if (!secondAlive && Friends == 2) {
 			secondAlive = true;
-			Friend2 = Instantiate (Friend2Prefab);
+			Friend2 = Instantiate (Friend2Prefab[indexFriend]);
 			Friend2.transform.SetParent (transform);
-			Friend2.transform.position = spawnFriend2.position;
+			Friend2.transform.position = spawnFriend2.transform.position;
+
+		}
+		if (GlobalVariables.isInvencible) {
+			if (firstAlive) {
+				Friend1.SetActive (false);
+			}
+			if (secondAlive) {
+
+				Friend2.SetActive (false);
+			}
 		}
 	}
 
@@ -216,12 +382,8 @@ public class Player : MonoBehaviour {
 		return index;
 	}
 
-	IEnumerator Died()
-	{
-		yield return new WaitForSeconds (3);
-		Destroy (this.gameObject);
-		SceneManager.LoadScene ("gameover");
-	}
+
+
 
 	IEnumerator	Dizzy()
 	{
@@ -230,49 +392,145 @@ public class Player : MonoBehaviour {
 
 
 	}
-	void OnCollisionEnter2D(Collision2D col)
-	{
-		if (!dead) {
-			
-			switch (col.gameObject.tag) {
-			case "Enemy":
-				takeDamage (damageEnemyValue);
-				break;
-			}
-		}
-	}
 
 	void OnTriggerEnter2D(Collider2D col)
 	{
-		if (!dead) {
+		if (!GlobalVariables.dead) {
 			
 			switch (col.gameObject.tag) {
-			case "Enemy":
-				takeDamage (damageEnemyValue);
-				break;
 			case "enemyShoot":
 				takeDamage (damageShootEnemy);	
 				break;
 			case "powerup":
+				if (sound == "on") {
+					AudioSource.PlayClipAtPoint (audioItens, col.gameObject.transform.position, volume);
+				}
 				powerup (col.gameObject);
 				break;
 			case "FriendItem":
+				if (sound == "on") {
+					AudioSource.PlayClipAtPoint (audioItens, col.gameObject.transform.position, volume);
+				}
 				AddFriends (col.gameObject);
 				break;
 			case "coin":
+				if (sound == "on") {
+					AudioSource.PlayClipAtPoint (audioCoins, col.gameObject.transform.position, volume);
+				}
 				coin (col.gameObject);
 				break;
+			case "coin 2":
+				GlobalVariables.coins = 2;
+				if (sound == "on") {
+					AudioSource.PlayClipAtPoint (audioItens, col.gameObject.transform.position, volume);
+				}
+				setCoin (col.gameObject);
+				break;
+			case "coin 3":
+				GlobalVariables.coins = 3;
+				if (sound == "on") {
+					AudioSource.PlayClipAtPoint (audioItens, col.gameObject.transform.position, volume);
+				}
+				setCoin (col.gameObject);
+				break;
+			case "coin 4":
+				GlobalVariables.coins = 4;
+				if (sound == "on") {
+					AudioSource.PlayClipAtPoint (audioItens, col.gameObject.transform.position, volume);
+				}
+				setCoin (col.gameObject);
+				break;
+			case "coin 5":
+				GlobalVariables.coins = 5;
+				if (sound == "on") {
+					AudioSource.PlayClipAtPoint (audioItens, col.gameObject.transform.position, volume);
+				}
+				setCoin (col.gameObject);
+				break;
+			case "coin 6":
+				GlobalVariables.coins = 6;
+				if (sound == "on") {
+					AudioSource.PlayClipAtPoint (audioItens, col.gameObject.transform.position, volume);
+				}
+				setCoin (col.gameObject);
+				break;
+			case "coin 7":
+				GlobalVariables.coins = 7;
+				if (sound == "on") {
+					AudioSource.PlayClipAtPoint (audioItens, col.gameObject.transform.position, volume);
+				}
+				setCoin (col.gameObject);
+				break;
+			case "coin 8":
+				GlobalVariables.coins = 8;
+				if (sound == "on") {
+					AudioSource.PlayClipAtPoint (audioItens, col.gameObject.transform.position, volume);
+				}
+				setCoin (col.gameObject);
+				break;
+			case "coin 9":
+				GlobalVariables.coins = 9;
+				if (sound == "on") {
+					AudioSource.PlayClipAtPoint (audioItens, col.gameObject.transform.position, volume);
+				}
+				setCoin (col.gameObject);
+				break;
+			case "coin 10":
+				GlobalVariables.coins = 10;
+				if (sound == "on") {
+					AudioSource.PlayClipAtPoint (audioItens, col.gameObject.transform.position, volume);
+				}
+				setCoin (col.gameObject);
+				break;
 			case "life":
+				if (sound == "on") {
+					AudioSource.PlayClipAtPoint (audioItens, col.gameObject.transform.position, volume);
+				}
 				life (col.gameObject);
+				break;
+			case "kill_all":
+				if (sound == "on") {
+					AudioSource.PlayClipAtPoint (audioItens, col.gameObject.transform.position, volume);
+				}
+				StartCoroutine ("kill_all", col.gameObject);
+				break;
+			case "diamond":
+				if (sound == "on") {
+					AudioSource.PlayClipAtPoint (audioItens, col.gameObject.transform.position, volume);
+				}
+				diamond (col.gameObject);
+				break;
+			case "invencible":
+				if (sound == "on") {
+					AudioSource.PlayClipAtPoint (audioItens, col.gameObject.transform.position, volume);
+				}
+				_GC.invencible++;
+				GameObject tempPrefab = Instantiate (prefabParticles) as GameObject;
+				tempPrefab.transform.position = col.gameObject.transform.position;
+				Destroy (col.gameObject);
+				Destroy (tempPrefab, 3);
 				break;
 			}
 		}
 	}
-
-	void takeDamage (int damage)
+	public void Restart()
 	{
+		_GC.StartHPBar ();
+		HP = HPMax;
+		percLife = (HP / HPMax);
+
+		transform.position = spawnPlayer.transform.position;
+		InitialShoot ();
+		playerAnimator.SetBool ("dead", false);
+		GlobalVariables.Playing = true;
+		_GC.StartCoroutine ("GameTime");
+	}
+	public void takeDamage (int damage)
+	{
+		if (!GlobalVariables.dead && !GlobalVariables.isInvencible) {
 			HP -= damage;
 			percLife = (HP / HPMax);
+
 			if (HP <= 0) {
 				DieOrRestart ();
 
@@ -281,6 +539,7 @@ public class Player : MonoBehaviour {
 				playerAnimator.SetBool ("dizzy", true);
 				StartCoroutine ("Dizzy");
 			}
+		}
 	}
 
 
@@ -298,31 +557,126 @@ public class Player : MonoBehaviour {
 		firstAlive = false;
 		secondAlive = false;
 		_GC.UpdateHPBar (percLife);
-		extraLifes -= 1;
-		_GC.extraLifes = extraLifes;
-		if (extraLifes <= 0) {
-			dead = true;
+		GlobalVariables.extralifes -= 1;
+
+//		_GC.extraLifes = GlobalVariables.extralifes;
+		if (GlobalVariables.extralifes <= 0) {
+			GlobalVariables.dead = true;
+			playerCollider.isTrigger = true;
 			playerAnimator.SetBool ("dead", true);
-			playerRB.velocity = new Vector2 (0.3f * speed, 0.3f * speed);
-			playerRB.IsSleeping ();
-			StartCoroutine ("Died");
-			Shoot = PlayerPrefs.GetString ("shoot");
+			playerRB.velocity = new Vector2 (0, 0);
+//			playerRB.IsSleeping ();
+			_GC.GameOver ();
+//			Shoot = PlayerPrefs.GetString ("shoot");
 		} else {
-			dead = false;
+			GlobalVariables.dead = false;
 			_GC.StartHPBar ();
 			HP = HPMax;
 			percLife = (HP / HPMax);
 
 			transform.position = spawnPlayer.transform.position;
-			Shoot = PlayerPrefs.GetString ("shoot");
-
+			InitialShoot ();
 		}
+
+	}
+
+	//************************* Itens logics
+
+	IEnumerator invencibleTime()
+	{
+		_GC.setPanel (true);
+//		invenciblePanel.SetActive (true);
+//		invencibleTxt.text = countdown.ToString ();
+		_GC.invincibleCountDown = countdown;
+		yield return new WaitForSeconds (1);
+		countdown--;
+		if (countdown > 0 ) {
+			StartCoroutine ("invencibleTime");
+		} else {
+			_GC.speeddown ();
+			speed = speed_ant;
+//			invencibleTxt.text = "";
+			GlobalVariables.isInvencible = false;
+			speed = speed_ant;
+			playerAnimator.SetBool ("invencible", false);
+			_GC.setPanel (false);
+//			invenciblePanel.SetActive (false);
+//			playerAnimator.SetBool ("fly", true);
+//			Vector3 theScale = new Vector3 (0.5f, 0.5f, 0.5f);
+//			transform.transform.localScale = theScale;
+			if (firstAlive) {
+				Friend1.SetActive (true);
+			}
+			if (secondAlive) {
+
+				Friend2.SetActive (true);
+			}
+		}
+
+	}
+	public void invencible()
+	{
+		switch (GlobalVariables.playerColor) {
+		case "red":
+			countdown = WhichTime(PlayerPrefs.GetInt ("redinvincible"));
+			break;
+		case "green":
+			countdown = WhichTime(PlayerPrefs.GetInt ("greeninvincible"));
+			break;
+		case "blue":
+			countdown = WhichTime(PlayerPrefs.GetInt ("blueinvincible"));
+			break;
+		case "yellow":
+			countdown = WhichTime(PlayerPrefs.GetInt ("yellowinvincible"));
+			break;
+		}
+
+		if (firstAlive) {
+			Friend1.SetActive (false);
+		}
+		if (secondAlive) {
+
+			Friend2.SetActive (false);
+		}
+		_GC.invencible--;
+		GlobalVariables.invencible--;
+		GlobalVariables.isInvencible = true;
+		playerAnimator.SetBool ("invencible", true);
+//		Vector3 theScale = new Vector3 (1, 1, 1);
+//		transform.localScale = theScale;
+		speed_ant = speed;
+		speed *= 2;
+		_GC.speedup ();
+
+
+		StartCoroutine ("invencibleTime");
+
+	}
+	IEnumerator kill_all (GameObject GO)
+	{
+		killall = true;
+		GameObject tempPrefab = Instantiate (prefabParticles) as GameObject;
+		tempPrefab.transform.position = GO.transform.position;
+		Destroy (GO);
+		Destroy (tempPrefab, 3);
+		yield return new WaitForSeconds (1.5f);
+		killall = false;
+	}
+
+	void diamond (GameObject GO)
+	{
+		_GC.diamonds++;
+		GameObject tempPrefab = Instantiate (prefabParticles) as GameObject;
+		tempPrefab.transform.position = GO.transform.position;
+		Destroy (GO);
+		Destroy (tempPrefab, 3);
 
 	}
 	void powerup(GameObject GO)
 	{
+		GlobalFunctions.achieviments ("powerup");
 		powerUps++;
-		_GC.points += 100 * powerUps;
+		GlobalVariables.points += 100 * powerUps;
 		GameObject tempPrefab = Instantiate (prefabParticles) as GameObject;
 		tempPrefab.transform.position = GO.transform.position;
 		Destroy (GO);
@@ -342,35 +696,34 @@ public class Player : MonoBehaviour {
 			break;
 		case "playerShoot4":
 			Shoot = "playerShoot4";
+			damageShoot4++;
 			break;
 		}
 	}
-
-	void coin(GameObject GO)
+	void setCoin(GameObject GO)
 	{
-		if (total_coins == 0) {
-			coins++;
-
-			total_coins +=coins;
-		} else {
-			coins++;
-
-			total_coins = total_coins + coins;
-		}
-
-		temp_coins = temp_coins++;		
-		total_coins = total_coins + total_coins * coins;
 		GameObject tempPrefab = Instantiate (prefabParticles) as GameObject;
 		tempPrefab.transform.position = GO.transform.position;
 		Destroy (GO);
 		Destroy (tempPrefab, 3);
-		_GC.coins = total_coins;
+
+	}
+	void coin(GameObject GO)
+	{
+
+//		total_coins = total_coins + coins;
+		_GC.coins = _GC.coins + GlobalVariables.coins;
+		GameObject tempPrefab = Instantiate (prefabParticles) as GameObject;
+		tempPrefab.transform.position = GO.transform.position;
+		Destroy (GO);
+		Destroy (tempPrefab, 3);
+
 	}
 
 	void life(GameObject GO)
 	{
-		extraLifes++;
-		_GC.extraLifes = extraLifes;
+		GlobalVariables.extralifes++;
+//		_GC.extraLifes = GlobalVariables.extralifes;
 		GameObject tempPrefab = Instantiate (prefabParticles) as GameObject;
 		tempPrefab.transform.position = GO.transform.position;
 		Destroy (GO);

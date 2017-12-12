@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: c3040a6b1bee84e8690f7fe7c4d370e8
+timeCreated: 1511297427
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Velino Poster
+  fontNames:
+  - Velino Poster
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

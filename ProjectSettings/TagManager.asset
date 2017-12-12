@@ -19,6 +19,19 @@ TagManager:
   - enemyShoot
   - life
   - coin
+  - coin 2
+  - coin 3
+  - coin 4
+  - coin 5
+  - coin 6
+  - coin 7
+  - coin 8
+  - coin 9
+  - coin 10
+  - kill_all
+  - diamond
+  - shield
+  - invencible
   layers:
   - Default
   - TransparentFX
@@ -28,9 +41,9 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
+  - PrimeiroPlano
+  - Adds
+  - Controls
   - 
   - 
   - 

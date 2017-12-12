@@ -6,27 +6,21 @@ using UnityEngine.EventSystems;
 
 public class virtualButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler {
 
-	public	GameObject	redPlayer;
-	public	string 		command;
 	public	Sprite[]	buttonImages;
 	private	Image 		button;
-
+	private	_GC _GC;
 
 
 	// Use this for initialization
 	void Start () {
-
+		_GC = FindObjectOfType (typeof(_GC)) as _GC;
 		button = GetComponent<Image> ();
 
 	}
 	
 	public void OnPointerDown(PointerEventData ped)
 	{
-		redPlayer.SendMessage (command, SendMessageOptions.DontRequireReceiver);
-//		greenPlayer.SendMessage (command, SendMessageOptions.DontRequireReceiver);
-//		yellowPlayer.SendMessage (command, SendMessageOptions.DontRequireReceiver);
-//		bluePlayer.SendMessage (command, SendMessageOptions.DontRequireReceiver);
-		button.sprite = buttonImages [1];
+			_GC.PlayerFire ();
 	}
 
 	public void OnPointerUp(PointerEventData ped)

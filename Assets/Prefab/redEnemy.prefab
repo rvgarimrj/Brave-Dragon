@@ -212,22 +212,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74be957fdb4a34e0792f8b42e5a3a5e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  speed: 1.5
   shootForce: -170
   timeForChangeSide: 1
-  timeForShooting: 2
+  timeForShooting: 2.5
   enemyShoot: {fileID: 4798866353968200}
-  prefabShoot: {fileID: 1919767995863668, guid: 5d88058a8699d499a8b2cbc966ed4e17,
+  prefabShoot: {fileID: 1711635195545026, guid: d34fe67b0322e4a21bdcea9a6ad2ae97,
     type: 2}
   prefabExplosion: {fileID: 1549276355264464, guid: 12d078908dbca4997bbeb64954240858,
     type: 2}
-  percentualOfChangeSide: 0
-  percentualOfShooting: 0
+  percentualOfChangeSide: 30
+  percentualOfShooting: 30
   HP: 5
   totalScore: 10
+  lootPercentage: 5
   gotHit: {fileID: 1021789184280634}
   damage: 5
-  loot: {fileID: 1378634130851534, guid: c0a3ccb0be95a40e08003ffc5b0a4e49, type: 2}
+  loot:
+  - {fileID: 1378634130851534, guid: c0a3ccb0be95a40e08003ffc5b0a4e49, type: 2}
 --- !u!114 &114764469557719344
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -268,8 +270,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -361578905
-  m_SortingLayer: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b6dab04b6449e4f84be41e215e876f9e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

@@ -9,6 +9,15 @@ EditorBuildSettings:
     path: Assets/Scenes/Home.unity
     guid: 7cf787a29ae8046429429489dba4a475
   - enabled: 1
+    path: Assets/Scenes/boosts.unity
+    guid: 1483c2487531d467aac47bd24f0c8b4f
+  - enabled: 1
+    path: Assets/Scenes/powerups.unity
+    guid: ccef8eaee05ab4a5bafce60659b7277c
+  - enabled: 0
+    path: 
+    guid: 57bd0904f9b7e4108bfdcdb291a8c93d
+  - enabled: 1
     path: Assets/Scenes/stage1.unity
     guid: c02e12058ef9a49da98ca94b81b41d86
   - enabled: 1
