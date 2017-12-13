@@ -120,31 +120,31 @@ public class ads_boosts : MonoBehaviour {
 
 		// Check for one key video
 
-		if (!PlayerPrefs.HasKey("dateonekey")) {
-			keyRewards.GetComponent<Button>().interactable = true;
-		} else {
-			temp = DateTime.Now.ToString ("MM/dd/yyyy");
-			//			print (PlayerPrefs.GetString ("datevideoinvincible"));
-			dateLastPlay4 = DateTime.Parse (PlayerPrefs.GetString ("dateonekey")); 
-			today =  DateTime.Parse (temp);
-			//			print (dateLastPlay);
-			//			print (today);
-			//			print(DateTime.Compare(today, dateLastPlay)); 
-			if (DateTime.Compare (today, dateLastPlay4) > 0 && rand <= 5) {
-				// Has passed more than one day since last reward
-				// and % is than 5% of chance
-				/*
-						Less than zero -> t1 is earlier than t2.
-
-						Zero ->  t1 is the same as t2.
-
-						Greater than zero -> t1 is later than t2. 
-						*/
-				keyRewards.GetComponent<Button>().interactable = true;
-			} else 
-				keyRewards.GetComponent<Button>().interactable = false;
-
-		}
+//		if (!PlayerPrefs.HasKey("dateonekey")) {
+//			keyRewards.GetComponent<Button>().interactable = true;
+//		} else {
+//			temp = DateTime.Now.ToString ("MM/dd/yyyy");
+//			//			print (PlayerPrefs.GetString ("datevideoinvincible"));
+//			dateLastPlay4 = DateTime.Parse (PlayerPrefs.GetString ("dateonekey")); 
+//			today =  DateTime.Parse (temp);
+//			//			print (dateLastPlay);
+//			//			print (today);
+//			//			print(DateTime.Compare(today, dateLastPlay)); 
+//			if (DateTime.Compare (today, dateLastPlay4) > 0 && rand <= 5) {
+//				// Has passed more than one day since last reward
+//				// and % is than 5% of chance
+//				/*
+//						Less than zero -> t1 is earlier than t2.
+//
+//						Zero ->  t1 is the same as t2.
+//
+//						Greater than zero -> t1 is later than t2. 
+//						*/
+//				keyRewards.GetComponent<Button>().interactable = true;
+//			} else 
+//				keyRewards.GetComponent<Button>().interactable = false;
+//
+//		}
 
 
 		// Check for 50 coins video

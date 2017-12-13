@@ -1,11 +1,10 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/IAPManager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/_GC.cs">
     <Files>
       <File FileName="Assets/Scripts/_GC_Powerup.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/_GC_GameOver.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/LevelBoundarySetup.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/goToScene.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/shootPlayerTrigger.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/PlayerFriend.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/DestroyExplosion.cs" Line="1" Column="1" />
@@ -33,15 +32,15 @@
       <File FileName="Assets/Scripts/Player.cs" Line="569" Column="16" />
       <File FileName="Assets/Scripts/GlobalFunctions.cs" Line="36" Column="26" />
       <File FileName="Assets/Scripts/GlobalVariables.cs" Line="16" Column="82" />
+      <File FileName="Assets/Scripts/IAPManager.cs" Line="17" Column="52" />
       <File FileName="Assets/Scripts/ads_boosts.cs" Line="1" Column="1" NotebookId="1" />
       <File FileName="Assets/Scripts/spawnCoins.cs" Line="1" Column="1" NotebookId="1" />
       <File FileName="Assets/Scripts/_GC_Boots.cs" Line="1" Column="1" NotebookId="1" />
-      <File FileName="Assets/Scripts/_GC.cs" Line="250" Column="5" NotebookId="1" />
+      <File FileName="Assets/Scripts/_GC.cs" Line="249" Column="105" NotebookId="1" />
       <File FileName="Assets/Scripts/Enemy.cs" Line="236" Column="43" NotebookId="1" />
       <File FileName="Assets/Scripts/_GC_Home.cs" Line="56" Column="35" NotebookId="1" />
-      <File FileName="Assets/Scripts/googlePlayService.cs" Line="62" Column="58" NotebookId="1" />
+      <File FileName="Assets/Scripts/googlePlayService.cs" Line="45" Column="11" NotebookId="1" />
       <File FileName="Assets/BraveDragonPlayService.cs" Line="1" Column="1" NotebookId="1" />
-      <File FileName="Assets/Scripts/IAPManager.cs" Line="1" Column="1" NotebookId="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

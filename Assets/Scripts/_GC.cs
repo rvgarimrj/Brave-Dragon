@@ -223,12 +223,14 @@ public class _GC : MonoBehaviour {
 			ads_playing.setId(0);
 			showKeyAdds.SetActive (true);
 			yield return null;
-		}else if (gameTime <= timeForAdds ) {
-//			PlayerPrefs.SetInt ("timeplaying", GlobalVariables.timePlaying); 
-//			print ("morreu abaixo de 30s");
-			showKeyAdds.SetActive (true);
-			yield return null;
-		} else 	if (PlayerPrefs.GetInt("keys") > 0) {
+		}
+//		else if (gameTime <= timeForAdds ) {
+////			PlayerPrefs.SetInt ("timeplaying", GlobalVariables.timePlaying); 
+////			print ("morreu abaixo de 30s");
+//			showKeyAdds.SetActive (true);
+//			yield return null;
+//		} 
+		else if (PlayerPrefs.GetInt("keys") > 0) {
 			// User watched keys adds at boosts scene
 //			print("assistiu ao video no boost");
 			showWatchedKeyVideo.SetActive (true);

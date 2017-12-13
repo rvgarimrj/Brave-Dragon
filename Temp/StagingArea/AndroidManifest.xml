@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools" package="com.x3ideias.bravedragon" android:versionCode="17" android:versionName="1.7" android:installLocation="preferExternal">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools" package="com.x3ideias.bravedragon" android:versionCode="19" android:versionName="1.9" android:installLocation="preferExternal">
   <uses-sdk android:minSdkVersion="16" android:targetSdkVersion="24" tools:overrideLibrary="android.support.compat,android.support.coreui,android.support.coreutils,android.support.fragment,android.support.mediacompat,android.support.v4" />
   <supports-screens android:anyDensity="true" android:largeScreens="true" android:normalScreens="true" android:smallScreens="true" android:xlargeScreens="true" />
   <uses-permission android:name="android.permission.INTERNET" />
@@ -42,7 +42,7 @@ Service handling Google Sign-In user revocation. For apps that do not integrate 
     <activity android:name="com.google.android.gms.common.api.GoogleApiActivity" android:exported="false" android:theme="@android:style/Theme.Translucent.NoTitleBar" />
     <activity android:name="com.unity3d.ads.adunit.AdUnitActivity" android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen" android:hardwareAccelerated="true" android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
     <activity android:name="com.unity3d.ads.adunit.AdUnitSoftwareActivity" android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen" android:hardwareAccelerated="false" android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
-    <meta-data android:name="unity.build-id" android:value="518f9c6a-1937-4874-bdfc-4626cd1e7e54" />
+    <meta-data android:name="unity.build-id" android:value="a098c2fb-472b-4346-b1d0-2e948f886468" />
     <meta-data android:name="unity.splash-mode" android:value="0" />
     <meta-data android:name="unity.splash-enable" android:value="True" />
   </application>
