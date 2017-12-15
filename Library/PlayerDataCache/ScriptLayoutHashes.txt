@@ -157,7 +157,7 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 44e7dd2c847d20ccc76316d5843da831 Assembly-CSharp.dll:.Home
 fcbf1635f53f833fc67e1c735231e4d7 Assembly-CSharp.dll:.virtualButton
 b773cc988b7dbd0565c0c58f734523d1 Assembly-CSharp.dll:._GC
-6a99a9f28e1c9679e5a5cd90742356f7 Assembly-CSharp.dll:.IAPManager
+da32451958fc3a5df0840360697eef3b Assembly-CSharp.dll:.IAPManager
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.Callbacks.PlayModeRunnerCallback
 5f2ad81aa8994e8fbe25d1e57afe6773 UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.PlaymodeTestsController
 64eb32cc721b1cc68a91ed57461e188c UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.Callbacks.RemoteTestResultSender

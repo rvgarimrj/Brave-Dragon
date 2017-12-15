@@ -5,12 +5,12 @@ using UnityEngine.Purchasing;
 using UnityEngine.UI;
 
 public class IAPManager : MonoBehaviour, IStoreListener {
-	public _GC_TXT _GC_TXT;
+	private _GC_TXT _GC_TXT;
 	public static IAPManager Instance;
 	public static IStoreController 		m_storeController;
 	public static IExtensionProvider	m_storeExtensionProvider;
 
-	public Text p_500coins, p_1500coins,p_3000coins,p_5000coins,p_3keys,p_5keys,p_unlockall,coins_TXT,txt_500coins,txt_1500coins,txt_3000coins,txt_5000coins,txt_3keys,txt_5keys,txt_unlockall;
+	public Text p_500coins, p_1500coins,p_3000coins,p_5000coins,p_3keys,p_5keys,p_unlockall,coins_TXT,txt_500coins,txt_1500coins,txt_3000coins,txt_5000coins,txt_3keys,txt_5keys,txt_unlockall,keys_txt;
 	// Product List -----------
 
 	public static string product500coins = "500coins";
@@ -60,8 +60,8 @@ public class IAPManager : MonoBehaviour, IStoreListener {
 
 		_GC_TXT = FindObjectOfType (typeof(_GC_TXT)) as _GC_TXT;
 
-		_GC_TXT.coins_TXT.text = PlayerPrefs.GetInt ("coins").ToString();
-		_GC_TXT.keys_txt.text = PlayerPrefs.GetInt ("keys").ToString();
+		coins_TXT.text = PlayerPrefs.GetInt ("coins").ToString();
+		keys_txt.text = PlayerPrefs.GetInt ("keys").ToString();
 		if (!IsInitialized()) {
 			InitializePurchasing ();
 		}
@@ -70,26 +70,26 @@ public class IAPManager : MonoBehaviour, IStoreListener {
 
 	void InitializePrices()
 	{
-		_GC_TXT.p_500coins.text = m_storeController.products.WithID (product500coins).metadata.localizedPriceString;
-		_GC_TXT.txt_500coins.text = m_storeController.products.WithID (product500coins).metadata.localizedDescription;
+		p_500coins.text = m_storeController.products.WithID (product500coins).metadata.localizedPriceString;
+		txt_500coins.text = m_storeController.products.WithID (product500coins).metadata.localizedDescription;
 
-		_GC_TXT.p_1500coins.text = m_storeController.products.WithID (product1500coins).metadata.localizedPriceString;
-		_GC_TXT.txt_1500coins.text = m_storeController.products.WithID (product1500coins).metadata.localizedDescription;
+		p_1500coins.text = m_storeController.products.WithID (product1500coins).metadata.localizedPriceString;
+		txt_1500coins.text = m_storeController.products.WithID (product1500coins).metadata.localizedDescription;
 
-		_GC_TXT.p_3000coins.text = m_storeController.products.WithID (product3000coins).metadata.localizedPriceString;
-		_GC_TXT.txt_3000coins.text = m_storeController.products.WithID (product3000coins).metadata.localizedDescription;
+		p_3000coins.text = m_storeController.products.WithID (product3000coins).metadata.localizedPriceString;
+		txt_3000coins.text = m_storeController.products.WithID (product3000coins).metadata.localizedDescription;
 
-		_GC_TXT.p_5000coins.text = m_storeController.products.WithID (product5000coins).metadata.localizedPriceString;
-		_GC_TXT.txt_5000coins.text = m_storeController.products.WithID (product5000coins).metadata.localizedDescription;
+		p_5000coins.text = m_storeController.products.WithID (product5000coins).metadata.localizedPriceString;
+		txt_5000coins.text = m_storeController.products.WithID (product5000coins).metadata.localizedDescription;
 
-		_GC_TXT.p_3keys.text = m_storeController.products.WithID (product3keys).metadata.localizedPriceString;
-		_GC_TXT.txt_3keys.text = m_storeController.products.WithID (product3keys).metadata.localizedDescription;
+		p_3keys.text = m_storeController.products.WithID (product3keys).metadata.localizedPriceString;
+		txt_3keys.text = m_storeController.products.WithID (product3keys).metadata.localizedDescription;
 
-		_GC_TXT.p_5keys.text = m_storeController.products.WithID (product5keys).metadata.localizedPriceString;
-		_GC_TXT.txt_5keys.text = m_storeController.products.WithID (product5keys).metadata.localizedDescription;
+		p_5keys.text = m_storeController.products.WithID (product5keys).metadata.localizedPriceString;
+		txt_5keys.text = m_storeController.products.WithID (product5keys).metadata.localizedDescription;
 
-		_GC_TXT.p_unlockall.text = m_storeController.products.WithID (productunlockall).metadata.localizedPriceString;
-		_GC_TXT.txt_unlockall.text = m_storeController.products.WithID (productunlockall).metadata.localizedDescription;
+		p_unlockall.text = m_storeController.products.WithID (productunlockall).metadata.localizedPriceString;
+		txt_unlockall.text = m_storeController.products.WithID (productunlockall).metadata.localizedDescription;
 
 
 
@@ -115,8 +115,9 @@ public class IAPManager : MonoBehaviour, IStoreListener {
 	}
 	// Update is called once per frame
 	void Update () {
-		_GC_TXT.coins_TXT.text = PlayerPrefs.GetInt ("coins").ToString();
-		_GC_TXT.keys_txt.text = PlayerPrefs.GetInt ("keys").ToString();
+		coins_TXT.text = PlayerPrefs.GetInt ("coins").ToString();
+		keys_txt.text = PlayerPrefs.GetInt ("keys").ToString();
+		InitializePrices ();
 	}
 
 	public void OnInitialized(IStoreController controller, IExtensionProvider extensions)
