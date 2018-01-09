@@ -236,7 +236,7 @@ MonoBehaviour:
   percentualOfShooting: 80
   HP: 3
   totalScore: 10
-  lootPercentage: 50
+  lootPercentage: 100
   gotHit: {fileID: 1473156945112202}
   damage: 1
   loot:

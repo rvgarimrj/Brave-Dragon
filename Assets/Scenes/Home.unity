@@ -8787,6 +8787,7 @@ MonoBehaviour:
   coins_TXT: {fileID: 2109709253}
   points_TXT: {fileID: 1762029866}
   extralifes: 1
+  storeButton: {fileID: 1486498365}
 --- !u!114 &1618069425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9173,7 +9174,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1672559931
 RectTransform:
   m_ObjectHideFlags: 0

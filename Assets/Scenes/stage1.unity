@@ -4074,7 +4074,7 @@ MonoBehaviour:
   showKeyAdds: {fileID: 1820068951}
   showWatchedKeyVideo: {fileID: 2115536516}
   pausePanel: {fileID: 730540712}
-  timeDivision: 60
+  timeDivision: 30
   timeForAdds: 30
 --- !u!4 &1618069423
 Transform:

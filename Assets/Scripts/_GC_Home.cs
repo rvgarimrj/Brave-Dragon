@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.Purchasing;
 
+public class _GC_Home : MonoBehaviour,IPointerDownHandler, IStoreListener {
+	public static IStoreController 		m_storeController;
+	public static IExtensionProvider	m_storeExtensionProvider;
 
-public class _GC_Home : MonoBehaviour,IPointerDownHandler {
 	[SerializeField] private Text 	coins_TXT,points_TXT;
 	[SerializeField] private int 	extralifes;
+	[SerializeField] private GameObject	storeButton;
 	// Use this for initialization
 	void Start () {
 		GlobalVariables.Playing = false;
@@ -24,7 +28,48 @@ public class _GC_Home : MonoBehaviour,IPointerDownHandler {
 	void Update () {
 		coins_TXT.text = PlayerPrefs.GetInt ("coins").ToString ();
 		points_TXT.text = PlayerPrefs.GetInt ("points").ToString ();
+		if (!IsInitialized ()) {
+			storeButton.SetActive (false);	
+			InitializePurchasing ();
+		} else {
+			storeButton.SetActive (true);
+		}
 	}
+	public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs e)
+	{
+				return PurchaseProcessingResult.Complete;
+	}
+	public void OnInitializeFailed(InitializationFailureReason error)
+	{
+		Debug.Log("DEBUG: IAPMANAGER OnInitializeFailed Error: " + error);
+	}
+	public void OnPurchaseFailed(Product i, PurchaseFailureReason p)
+	{
+		Debug.Log ("DEBUG: OnPurchaseFailed for Product " + i.definition.id + " ERROR: " + p);
+	}
+
+	public void InitializePurchasing()
+	{
+		if (IsInitialized()) {
+			return;
+		}
+		StandardPurchasingModule module = StandardPurchasingModule.Instance ();
+		ConfigurationBuilder builder = ConfigurationBuilder.Instance (module);
+
+		UnityPurchasing.Initialize (this, builder);
+
+	}
+
+	public void OnInitialized(IStoreController controller, IExtensionProvider extensions)
+	{
+		m_storeController = controller;
+		m_storeExtensionProvider = extensions;
+	}
+	private bool IsInitialized()
+	{
+		return m_storeController != null && m_storeExtensionProvider != null;
+	}
+
 	public void OnPointerDown(PointerEventData ped)
 	{
 		Application.Quit ();
